@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block start%}
+{% load static %}
+<!-- <div class="" id="home">
+    <h1 class="rounded-3 text-center text-capitalize text-danger bg-dark p-2 m-2 border-danger shadow border-5 ">welcome to my Recepie website</h1>
+    
+    <img class="img img-fluid img-thumbnail w-100 h-auto" src="{% static "realistic-various-vegetables-pic.avif" %}" >
+    
+    
+</div> -->
+<div class="" id="home" style="position: relative; text-align: center;">  
+    <img class="img img-fluid img-thumbnail w-100 h-auto" src="{% static 'realistic-various-vegetables-pic.avif' %}" style="width: 100%; height: auto;">  
+    
+    <h1 class="rounded-3 text-dark text-capitalize text-dangertext-shadow-5 fw-bold fs-1  p-2 m-2 border-danger shadow border-10"   
+        style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);">  
+        Welcome To Our Recipe Website  
+    </h1>  
+</div>  
+
+<div class="container mt-5">
+    <form class="col-6 mx-auto card p-3 shadow-lg " method="post" enctype="multipart/form-data" id="add">
+        {% csrf_token %}
+        <div class="mb-3">
+            <h2>Add Receipe</h2>
+            <label for="exampleInputEmail1" class="form-label">Receipe Name</label>
+            <input name="receipe_name" required type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Receipe description</label>
+            <textarea class="form-control" name="receipe_description" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Receipe image</label>
+            <input name="receipe_image" type="file" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-success">Add Receipe</button>
+    </form>
+    <section class="pt-5 shadow-sm" id="about">
+
+   
+
+
+    <h2 class='text-bold text-center pt-4 '>Recepie Detials</h2>
+
+    <table class="table mt-5 ">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Receipe name</th>
+            <th scope="col">Receipe Description</th>
+            <th scope="col">image</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for receipe in receipes %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{receipe.receipe_name}}</td>
+            <td>{{receipe.receipe_description}}</td>
+            <td>
+              
+             <img  src="/media/{{receipe.receipe_image}}" alt="An Error is occuring while accing this image."class="img-fluid rounded shadow-sm" style="height: 10vh;">  
+             <td>
+              <a href="/delete_receipe/{{receipe.id}}/" class="btn btn-danger m-2  ">Delete</a>
+              <a href="/update_receipe/{{receipe.id}}/" class="btn btn-success ms-2 ">update</a>
+              </td> 
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section> 
+</div>
+
+<section class="contact py-5  " id="Contact">
+    <div class="container bg-light rounded-3">
+        <div>
+            <h1 class="text-center my-5 ">Contact<span class="text-primary "> Us </span>
+                <hr class="w-25 m-auto  ">
+            </h1>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6 col-12" data-aos="fade-up-left">
+
+                <form class="row g-3 ">
+                    <div class="col-md-6">
+                        <label for="inputEmail4" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="inputEmail4">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputPassword4" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="inputPassword4">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="inputCity" class="form-label">City</label>
+                        <input type="text" class="form-control" id="inputCity">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputState" class="form-label">State</label>
+                        <select id="inputState" class="form-select">
+                            <option selected>Choose...</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="inputZip" class="form-label">Zip</label>
+                        <input type="text" class="form-control" id="inputZip">
+                    </div>
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label" for="gridCheck">
+                                Check me out
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-5 col-12 m-auto text-end p-2 " data-aos="fade-up-right">
+
+                <img src="{% static 'shutterstock_1811458927-1.jpg' %}"  style="border-radius:50%; height: 70vh ; width: 100%;" class="img-fluid  img-thumbnail p-2 "  >
+            </div>
+        </div>
+
+
+
+    </div>
+</section>
+<div class="container-fluid  bg-primary  text-white  p-2 text-center ">Developed by Sanaullah akhonzada</div>
+
+{% endblock %}
+
